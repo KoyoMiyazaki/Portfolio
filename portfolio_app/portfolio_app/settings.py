@@ -1,5 +1,10 @@
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -67,8 +72,12 @@ WSGI_APPLICATION = 'portfolio_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'portfolio_app',
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -95,9 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -117,3 +126,41 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'loggers': {
+        # Django全体
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        # portfolio用のロガー
+        'portfolio': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        }
+    },
+
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+            'formatter': 'dev',
+        },
+    },
+
+    'formatters': {
+        'dev': {
+            'format': ' '.join([
+                '%(asctime)s',
+                '[%(levelname)-8s]',
+                '%(pathname)s(Line:%(lineno)d)',
+                '%(message)s',
+            ]),
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+    }
+}
