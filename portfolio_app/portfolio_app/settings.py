@@ -30,9 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'portfolio.apps.PortfolioConfig',
     'accounts.apps.AccountsConfig',
+
+    'allauth',
+    'allauth.account',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -166,3 +170,25 @@ LOGGING = {
         },
     }
 }
+
+# django-allauth用の設定
+AUTHENTICATION_BACKENDS = [
+    # (e-mail等の)allauth用
+    'allauth.account.auth_backends.AuthenticationBackend',
+    # django管理用
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SITE_ID = 1
+
+# ユーザ名認証ではなく、email認証に設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+
+# サインアップ時にメールアドレスの検証を必須とする
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+# ログイン/ログアウト後のリダイレクト先
+LOGIN_REDIRECT_URL = 'portfolio:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
