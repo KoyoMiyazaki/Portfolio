@@ -171,6 +171,8 @@ LOGGING = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # django-allauth用の設定
 AUTHENTICATION_BACKENDS = [
     # (e-mail等の)allauth用
@@ -192,3 +194,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 # ログイン/ログアウト後のリダイレクト先
 LOGIN_REDIRECT_URL = 'portfolio:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+# ログアウト確認用ページに移ることなくログアウトをする
+ACCOUNT_LOGOUT_ON_GET = True

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirm</title>
+</head>
+<body>
+
+    <h1>Custom Email Confirm page</h1>
+
+    {% if confirmation %}
+
+    <p>登録する場合は以下登録ボタンをクリックしてください。</p>
+
+    <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+    {% csrf_token %}
+        <button type="submit">登録</button>
+    </form>
+
+    {% else %}
+
+    {% url 'account_email' as email_url %}
+
+    <p>リンクの有効期限が切れています。<a href="{{ email_url }}">再申請</a></p>
+
+    {% endif %}
+
+</body>
+</html>
