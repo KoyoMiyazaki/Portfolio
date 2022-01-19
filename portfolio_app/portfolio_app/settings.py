@@ -193,7 +193,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 # ログイン/ログアウト後のリダイレクト先
 LOGIN_REDIRECT_URL = 'portfolio:index'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_signup'
 
 # ログアウト確認用ページに移ることなくログアウトをする
 ACCOUNT_LOGOUT_ON_GET = True
