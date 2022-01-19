@@ -25,7 +25,7 @@ class TestAccounts(LiveServerTestCase):
         self.selenium.get('http://localhost:8000' + str(reverse_lazy('account_login')))
 
         # ログイン画面に移ったことを確認
-        self.assertEquals("ログイン", self.selenium.title)
+        self.assertEquals("ログイン | Portfolio", self.selenium.title)
         
         # 要素の初期化
         email_input = self.selenium.find_element_by_name("login")
@@ -40,9 +40,9 @@ class TestAccounts(LiveServerTestCase):
         # ログイン成功し、Portfolioトップページへ移ることを確認
         self.assertEquals("My Portfolio | Portfolio", self.selenium.title)
 
-        # ログアウト後(ログアウトへGET後)、ログイン画面へ移ることを確認
+        # ログアウト後(ログアウトへGET後)、サインアップ画面へ移ることを確認
         self.selenium.get('http://localhost:8000' + str(reverse_lazy('account_logout')))
-        self.assertEquals("ログイン", self.selenium.title)
+        self.assertEquals("サインアップ | Portfolio", self.selenium.title)
     
     # signupについてのテスト
     def test_signup(self):
@@ -50,7 +50,7 @@ class TestAccounts(LiveServerTestCase):
         self.selenium.get('http://localhost:8000' + str(reverse_lazy('account_signup')))
 
         # サインアップ画面に移ったことを確認
-        self.assertEquals("サインアップ", self.selenium.title)
+        self.assertEquals("サインアップ | Portfolio", self.selenium.title)
         
         # 要素の初期化
         email_input = self.selenium.find_element_by_name("email")
@@ -65,7 +65,7 @@ class TestAccounts(LiveServerTestCase):
         button_signup.click()
 
         # 入力後、メールアドレス検証画面へ移ることを確認
-        self.assertEquals("メールアドレスを確認してください", self.selenium.title)
+        self.assertEquals("メールアドレスを確認してください | Portfolio", self.selenium.title)
 
         # time.sleep(3)
         # ダミーユーザを削除
@@ -77,17 +77,17 @@ class TestAccounts(LiveServerTestCase):
         self.selenium.get('http://localhost:8000' + str(reverse_lazy('account_reset_password')))
 
         # パスワードリセット画面に移ったことを確認
-        self.assertEquals("パスワードリセット", self.selenium.title)
+        self.assertEquals("パスワードリセット | Portfolio", self.selenium.title)
         
         # 要素の初期化
         email_input = self.selenium.find_element_by_name("email")
         button_password_reset = self.selenium.find_element_by_id('btn-password-reset')
 
         # 各種入力
-        email_input.send_keys('dummy@test.com')
+        email_input.send_keys('testuser@test.com')
         button_password_reset.click()
 
+        self.selenium.implicitly_wait(10)
         # 入力後、パスワードリセットメール送信完了画面へ移ることを確認
-        self.assertEquals("パスワードリセット用のメールを送信しました", self.selenium.title)
-    
+        self.assertEquals("パスワードリセット用のメールを送信しました | Portfolio", self.selenium.title)
     
