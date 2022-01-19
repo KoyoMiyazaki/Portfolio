@@ -4,7 +4,11 @@ import chromedriver_binary
 from selenium.webdriver.chrome.webdriver import WebDriver
 from .models import CustomUser
 
+import os
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class TestAccounts(LiveServerTestCase):
 
@@ -34,7 +38,7 @@ class TestAccounts(LiveServerTestCase):
 
         # 各種入力
         email_input.send_keys('testuser@test.com')
-        password_input.send_keys('!xHb5uJ2vr')
+        password_input.send_keys(os.getenv('TESTUSER_PASSWORD'))
         button_login.click()
 
         # ログイン成功し、Portfolioトップページへ移ることを確認
@@ -60,8 +64,8 @@ class TestAccounts(LiveServerTestCase):
 
         # 各種入力
         email_input.send_keys('dummy@test.com')
-        password1_input.send_keys('!xHb5uJ2vr')
-        password2_input.send_keys('!xHb5uJ2vr')
+        password1_input.send_keys(os.getenv('TESTUSER_PASSWORD'))
+        password2_input.send_keys(os.getenv('TESTUSER_PASSWORD'))
         button_signup.click()
 
         # 入力後、メールアドレス検証画面へ移ることを確認
