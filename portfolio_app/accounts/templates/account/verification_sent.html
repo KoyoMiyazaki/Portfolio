@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>メールアドレスを確認してください</title>
-    <link rel="stylesheet" href="{% static 'css/accounts_tailwind.css' %}">
-</head>
-<body>
-    <div class="min-h-screen bg-gradient-to-bl from-indigo-500 to-blue-400 shadow-md flex flex-col m-0 text-center py-64 font-body">
-        <div class="max-w-xl w-full mx-auto my-0">
-            <h1 class="text-5xl mb-6 text-white px-3">Portfolio App</h1>
+{% extends 'base_accounts.html' %}
 
-            <div class="text-left text-lg text-white px-3">
-                <p>確認のメールを送信しました。</p>
-                <p>メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。</p>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+{% block title %}メールアドレスを確認してください | Portfolio{% endblock %}
+
+{% block contents %}
+<div class="text-left text-lg text-white px-3">
+    <p>確認のメールを送信しました。</p>
+    <p>メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。</p>
+</div>
+{% endblock contents %}
