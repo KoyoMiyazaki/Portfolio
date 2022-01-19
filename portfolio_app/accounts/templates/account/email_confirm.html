@@ -1,31 +1,32 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Confirm</title>
+    <title>メールアドレスを確認してください</title>
+    <link rel="stylesheet" href="{% static 'css/accounts_tailwind.css' %}">
 </head>
 <body>
+    <div class="min-h-screen bg-gradient-to-bl from-indigo-500 to-blue-400 shadow-md flex flex-col m-0 text-center py-64 font-body">
+        <div class="max-w-xl w-full mx-auto my-0">
+            <h1 class="text-5xl mb-6 text-white px-3">Portfolio App</h1>
+            {% if confirmation %}
+            <p class="text-lg text-white mb-6">メールアドレス <a class="border-b border-dotted" href="mailto:{{ confirmation.email_address.email }}">{{ confirmation.email_address.email }}</a> で登録しますか？</p>
+            
+            <form class="flex flex-col max-w-full" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                {% csrf_token %}
+                <button class="mx-8 mb-4 py-3 rounded-md  bg-white bg-opacity-80 hover:bg-opacity-100 transition-colors text-indigo-500" type="submit">登録</button>
+            </form>
 
-    <h1>Custom Email Confirm page</h1>
+            {% else %}
+            {% url 'account_email' as email_url %}
 
-    {% if confirmation %}
+            <p class="text-lg text-white">リンクの有効期限が切れています。<a class="border-b border-dotted" href="{{ email_url }}">再申請</a></p>
 
-    <p>登録する場合は以下登録ボタンをクリックしてください。</p>
-
-    <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-    {% csrf_token %}
-        <button type="submit">登録</button>
-    </form>
-
-    {% else %}
-
-    {% url 'account_email' as email_url %}
-
-    <p>リンクの有効期限が切れています。<a href="{{ email_url }}">再申請</a></p>
-
-    {% endif %}
-
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>
