@@ -1,8 +1,8 @@
+from multiprocessing import dummy
 from django.test import LiveServerTestCase
 from django.urls import reverse_lazy
 import chromedriver_binary
 from selenium.webdriver.chrome.webdriver import WebDriver
-from .models import CustomUser
 
 import os
 import time
@@ -16,7 +16,6 @@ class TestAccounts(LiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.selenium = WebDriver()
-        # cls.selenium.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):
@@ -70,10 +69,6 @@ class TestAccounts(LiveServerTestCase):
 
         # 入力後、メールアドレス検証画面へ移ることを確認
         self.assertEquals("メールアドレスを確認してください | Portfolio", self.selenium.title)
-
-        # time.sleep(3)
-        # ダミーユーザを削除
-        # CustomUser.objects.get(email='dummy@test.com').delete()
 
     # password_resetについてのテスト
     def test_password_reset(self):
