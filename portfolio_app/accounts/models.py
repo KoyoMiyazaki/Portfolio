@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .manager import UserManager
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
+    email = models.EmailField(unique=True)
 
-    class Meta:
-        verbose_name_plural = 'CustomUser'
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
