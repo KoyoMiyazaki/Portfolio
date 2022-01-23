@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
     'portfolio.apps.PortfolioConfig',
     'accounts.apps.AccountsConfig',
+    'memo.apps.MemoConfig',
 
     'allauth',
     'allauth.account',
