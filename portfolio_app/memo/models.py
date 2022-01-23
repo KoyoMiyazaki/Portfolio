@@ -5,6 +5,9 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -13,6 +16,9 @@ class Memo(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-updated_at', '-created_at']
 
     def __str__(self):
         return self.content[0:50]

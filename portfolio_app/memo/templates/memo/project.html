@@ -1,0 +1,23 @@
+{% extends 'base_memo.html' %}
+
+{% block title %}{{page_project.name}} | Project Memo{% endblock %}
+
+{% block contents %}
+<h2>メモ作成</h2>
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div>
+        <label for="id_content">内容</label>
+        <textarea name="content" cols="40" rows="10" id="id_content" required></textarea>
+    </div>
+
+    <button type="submit">登録</button>
+</form>
+
+<h2>メモ一覧</h2>
+{% for memo in memos %}
+<p>{{memo.content}} - {{memo.project.name}} {{memo.updated_at}} <a href="{% url 'memo:update-memo' memo.id %}">更新</a> <a href="{% url 'memo:delete-memo' memo.id %}">削除</a></p>
+{% endfor %}
+
+{% endblock contents %}
