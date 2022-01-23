@@ -1,20 +1,20 @@
 {% extends 'base_memo.html' %}
 
-{% block title %}トップ | Project Memo{% endblock %}
+{% block title %}更新ページ | Project Memo{% endblock %}
 
 {% block contents %}
-<h2>メモ作成</h2>
+<h2>メモ更新</h2>
 <form action="" method="post">
     {% csrf_token %}
 
     <div>
         <label for="id_content">内容</label>
-        <textarea name="content" cols="40" rows="10" id="id_content" required></textarea>
+        <textarea name="content" cols="40" rows="10" id="id_content" required>{{memo.content}}</textarea>
     </div>
 
     <div>
         <label for="id_project">プロジェクト</label>
-        <input type="text" name="project" list="project-list" required>
+        <input type="text" value="{{memo.project.name}}" name="project" list="project-list" required>
         <datalist id="project-list">
             <select id="id_project">
                 {% for project in projects %}
@@ -24,11 +24,7 @@
         </datalist>
     </div>
 
-    <button type="submit">登録</button>
+    <button type="submit">更新</button>
 </form>
 
-<h2>メモ一覧</h2>
-{% for memo in memos %}
-<p>{{memo.content}} - {{memo.project.name}} {{memo.updated_at}} <a href="{% url 'memo:update-memo' memo.id %}">更新 <a href="{% url 'memo:delete-memo' memo.id %}">削除</a></a></p>
-{% endfor %}
 {% endblock contents %}

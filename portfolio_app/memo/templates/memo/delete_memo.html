@@ -1,0 +1,21 @@
+{% extends 'base_memo.html' %}
+
+{% block title %}削除ページ | Project Memo{% endblock %}
+
+{% block contents %}
+<h2>メモ削除</h2>
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div>
+        <p>内容: {{memo.content}}</p>
+    </div>
+
+    <div>
+        <p>プロジェクト: {{memo.project.name}}</p>
+    </div>
+
+    <button type="submit">削除</button>
+</form>
+
+{% endblock contents %}

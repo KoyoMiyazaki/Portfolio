@@ -1,0 +1,15 @@
+body {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    max-width: 1080px;
+    width: 100%;
+    background-color: #F0F0F0;
+}
+.flex-row {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
