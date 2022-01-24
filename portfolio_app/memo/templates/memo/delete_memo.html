@@ -3,16 +3,18 @@
 {% block title %}削除ページ | Project Memo{% endblock %}
 
 {% block contents %}
-<h2>メモ削除</h2>
+<h2 class="section-title">メモ削除</h2>
 <form action="" method="post">
     {% csrf_token %}
 
-    <div>
-        <p>内容: {{memo.content}}</p>
+    <div class="flex-col">
+        <label for="id_content">内容</label>
+        <textarea name="content" cols="40" rows="10" id="id_content" readonly>{{memo.content}}</textarea>
     </div>
 
-    <div>
-        <p>プロジェクト: {{memo.project.name}}</p>
+    <div class="flex-col">
+        <label for="id_project">プロジェクト</label>
+        <input type="text" name="project" list="project-list" value="{{memo.project.name}}" readonly>
     </div>
 
     <button type="submit">削除</button>
