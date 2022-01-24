@@ -3,16 +3,16 @@
 {% block title %}更新ページ | Project Memo{% endblock %}
 
 {% block contents %}
-<h2>メモ更新</h2>
+<h2 class="section-title">メモ更新</h2>
 <form action="" method="post">
     {% csrf_token %}
 
-    <div>
+    <div class="flex-col">
         <label for="id_content">内容</label>
         <textarea name="content" cols="40" rows="10" id="id_content" required>{{memo.content}}</textarea>
     </div>
 
-    <div>
+    <div class="flex-col">
         <label for="id_project">プロジェクト</label>
         <input type="text" value="{{memo.project.name}}" name="project" list="project-list" required>
         <datalist id="project-list">

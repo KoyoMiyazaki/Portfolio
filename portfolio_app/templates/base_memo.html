@@ -10,13 +10,13 @@
 </head>
 <body>
     <div class="container">
-        <h1><a href="{% url 'memo:index' %}">Project Memo</a></h1>
+        <h1 class="header"><a href="{% url 'memo:index' %}">Project Memo</a></h1>
     
-        <div class="flex-row">
-            <div>
-                <h2>プロジェクト</h2>
+        <div class="content grid">
+            <div class="project-list flex-col">
+                <h2 class="section-title">プロジェクト</h2>
                 {% for project in projects %}
-                <p><a href="{% url 'memo:project' project.id %}">{{project.name}}</a></p>
+                <a class="project" href="{% url 'memo:project' project.id %}">{{project.name}}</a>
                 {% endfor %}
             </div>
     

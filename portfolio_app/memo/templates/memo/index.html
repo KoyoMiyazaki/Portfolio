@@ -3,16 +3,16 @@
 {% block title %}トップ | Project Memo{% endblock %}
 
 {% block contents %}
-<h2>メモ作成</h2>
+<h2 class="section-title">メモ作成</h2>
 <form action="" method="post">
     {% csrf_token %}
 
-    <div>
+    <div class="flex-col">
         <label for="id_content">内容</label>
         <textarea name="content" cols="40" rows="10" id="id_content" required></textarea>
     </div>
 
-    <div>
+    <div class="flex-col">
         <label for="id_project">プロジェクト</label>
         <input type="text" name="project" list="project-list" required>
         <datalist id="project-list">
@@ -27,8 +27,17 @@
     <button type="submit">登録</button>
 </form>
 
-<h2>メモ一覧</h2>
+<h2 class="section-title">メモ一覧</h2>
 {% for memo in memos %}
-<p>{{memo.content}} - {{memo.project.name}} {{memo.updated_at}} <a href="{% url 'memo:update-memo' memo.id %}">更新 <a href="{% url 'memo:delete-memo' memo.id %}">削除</a></a></p>
+<div class="memo-list">
+    <p class="memo-content">{{memo.content}}</p>
+    <p class="memo-metainfo">プロジェクト:{{memo.project.name}}</p>
+    <p class="memo-metainfo">更新日:{{memo.updated_at}}</p>
+    <div class="links">
+        <a class="update-link" href="{% url 'memo:update-memo' memo.id %}">更新</a>
+        <a class="delete-link" href="{% url 'memo:delete-memo' memo.id %}">削除</a>
+    </div>
+    <hr>
+</div>
 {% endfor %}
 {% endblock contents %}
